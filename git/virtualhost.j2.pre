@@ -1,0 +1,8 @@
+<VirtualHost *:80>
+  ServerName {{ ServerNameA }}
+  DocumentRoot {{ DocumentRootA }}
+</VirtualHost>
+<VirtualHost *:80>
+  ServerName {{ ServerNameB }}
+  DocumentRoot {{ DocumentRootB }}
+</VirtualHost>

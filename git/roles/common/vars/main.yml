@@ -1,0 +1,18 @@
+## -- INITIALIZERによる挿入 --
+ServerNameA: a.site
+DocumentRootA: /var/www/html/site_a
+ServerNameB: b.site
+DocumentRootB: /var/www/html/site_b
+ServerNameC: c.site
+DocumentRootC: /var/www/html/site_c
+ServerNameD: d.site
+DocumentRootD: /var/www/html/site_d
+
+add_newdirectory:
+  - site_c
+  - site_d
+
+#SiteName:
+#  - Please Write New Site Name
+
+## -- INITIALIZERによる挿入 --

@@ -1,0 +1,39 @@
+## -- INITIALIZERによる挿入 --
+# site.ymlはincludeのみでシンプルに保ちます。
+- hosts: target
+  become: yes
+
+  roles: 
+    - role: common
+
+  tasks:
+    - name: Virtualhost用のconfファイルを設置する
+      template:
+        src: roles/common/templates/virtualhost.j2
+        dest: /etc/httpd/conf.d/virtualhost.conf
+    
+    - name: ディレクトリ作成
+      file:
+        path: "/var/www/html/{{ item }}"
+        state: directory
+        mode: 0755
+      with_items: "{{ add_newdirectory }}"
+    
+    - name: テストページ作成
+      file:
+        path: "/var/www/html/{{ item }}/index.html"
+        state: touch
+      with_items: "{{ add_newdirectory }}" 
+      
+    - name: Virtualhost用のconfファイルを設置する
+      template:
+        src: roles/common/templates/txt.j2
+        dest: /var/www/html/{{ item }}/index.html
+      with_items: "{{ add_newdirectory }}"
+  
+    - name: ターゲットホストのApacheを再起動する
+      service:
+        name: httpd
+        state: restarted 
+
+## -- INITIALIZERによる挿入 --
